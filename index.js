@@ -35,6 +35,6 @@ app.set("view engine", "ejs");
 //--------------------------------------------
 //LISTEN
 //--------------------------------------------
-app.listen(process.env.PORT, process.env.IP, function () {
+app.listen(process.env.PORT || 8080, function () {
     console.log("Registration System is Running!!");
 })
