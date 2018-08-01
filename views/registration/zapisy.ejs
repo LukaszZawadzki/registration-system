@@ -1,0 +1,96 @@
+<% include ../partials/formheader %>
+        <header>
+            <h1>Klasy <%=klasy%></h1>
+        </header>
+        <form action="/zapisy" method="POST">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="imie">Imię</label>
+              <input type="text" class="form-control" name="student[name]" id="imie" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="nazwisko">Nazwisko</label>
+              <input type="text" class="form-control" name="student[lastname]" id="nazwisko" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Email</label>
+              <input type="email" class="form-control" name="student[email]" id="inputEmail4" placeholder="Email" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Hasło, wpisz je by móc sprawdzić do której grupy zostałeś przydzielony</label>
+              <input type="password" class="form-control" name="student[password]" id="inputPassword4" placeholder="minimum 6 znaków" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="szkola">Szkoła</label>
+              <input type="text" class="form-control" name="student[school]" id="szkola" placeholder="np. Szkoła Podstawowa 162" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="klasa">Klasa</label>
+              <input type="text" class="form-control" name="student[schoolClass]" id="klasa" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <div class="form-row">
+              <label class="form-check-label" for="gridCheck">
+                Na spotkania najbardziej chciałbym/ałabym uczęszczać w terminie:
+              </label>
+                  <% wszystkieTerminy.forEach(function(termin){ %>
+                    <% if (termin.students.length < 30) { %>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="student[group]" id="wyb<%=termin.name%>" value="<%=termin._id%>" required>
+                      <label class="form-check-label" for="wyb<%=termin.name%>">
+                          <%=termin.day%>, godz. <%=termin.hour%>
+                      </label>
+                    </div>
+                    <% } else { %>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="student[group]" id="wyb<%=termin.name%>" value="null" disabled>
+                      <label class="form-check-label disabled"  for="wyb<%=termin.name%>">
+                          <%=termin.day%>, godz. <%=termin.hour%> - brak miejsc!
+                      </label>
+                    </div>
+                  <% } }) %>
+                </div>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Adres</label>
+            <select name="student[address]" class="custom-select custom-select-lg mb-3" required>
+              <option value="" selected>Wybierz ulicę zamieszkania w Parafii</option>
+              <option value="1">ul.Bojki</option>
+              <option value="2">ul.Bujaka</option>
+              <option value="3">ul.Filipowicza</option>
+              <option value="4">ul.Halszki</option>
+              <option value="5">ul.Kordiana - bloki oraz nry 6, 6a, 10, 12, 16, 18, 26, 30</option>
+              <option value="6">ul.Łowienicka</option>
+              <option value="7">ul.Nazaretańska</option>
+              <option value="8">ul.Pagórkowa</option>
+              <option value="9">ul.Stojałowskiego</option>
+              <option value="10">ul.Turniejowa bloki od 59 do 73F oraz nry 67, 69, 70, 72</option>
+              <option value="11">ul.Witosa</option>
+              <option value="12">ul.Wysłouchów</option>
+              <option value="13">ul.Żaka</option>
+              <option value="50">INNY - POZA PARAFIĄ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="student[zgoda]" id="gridCheck" required>
+              <label class="form-check-label" for="gridCheck">
+                Wyrażam zgodę na przetwarzanie moich danych osobowych przez Parafię Podwyższania Krzyża Świętego w Krakowie na potrzeby rekrutacji do Kursu Przygotowującego do Sakramentu Bieżmowania.
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn brn-lg btn-primary btn-block">Zapisz się</button>
+          </div>
+
+
+        </form>
+<% include ../partials/formfooter %>
