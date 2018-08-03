@@ -18,9 +18,10 @@ section {
   justify-content: center;
 
 }
-.btn-primary {
-    width: 100%;
-}
+div[class="container"] {
+      padding-right: 3%;
+    }
+
 .disabled {
     color: #5f5f5f;
 }
