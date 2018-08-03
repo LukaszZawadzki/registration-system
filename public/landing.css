@@ -27,8 +27,16 @@ h1 {
     color: #d1d1d1;
     padding-bottom: 10%;
 }
+
+.important {
+    color: red;
+}
+
 h2 {
     padding-bottom: 10%;
+}
+h3 {
+    margin-top: 30px;
 }
 
 ul {
