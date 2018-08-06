@@ -2,16 +2,16 @@
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
-    
-}
+    }
 body {
+    animation: imageAnimation 1s linear; 
     background: url('krzyz-kurdwanow-lukasz_zawadzki.jpg') center;
     background-size: cover;
     height: 100vh;
     color: #000;
+    
 }
 header {
-    background-color: #fff;
     position: absolute;
     width: 20vw;
     top: 5%;
@@ -33,13 +33,16 @@ h1 {
 }
 
 h2 {
+    font-size: 3vh;
     padding-bottom: 10%;
 }
 h3 {
+    font-size: 2vh;
     margin-top: 30px;
 }
 
 ul {
+    font-size: 2vh;
     list-style-type: none;
 }
 ul li {
@@ -48,4 +51,21 @@ ul li {
 .left-menu {
     position: absolute;
     height: 100%;
+}
+
+
+@keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  100% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+	opacity: 1;
 }
