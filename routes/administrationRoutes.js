@@ -12,12 +12,12 @@ var LocalStrategy = require("passport-local");
 
 
 //registration form
-router.get("/register", function(req, res){
+router.get("/register", isLoggedIn, function(req, res){
     res.render("administration/register");
 });
 
 //handling user register
-router.post("/register", function(req, res){
+router.post("/register", isLoggedIn, function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
         if(err){ 
             console.log(err);
