@@ -60,6 +60,9 @@ app.use("/administracja", administrationRoutes);
 //--------------------------------------------
 //LISTEN
 //--------------------------------------------
-app.listen(process.env.PORT || 8080, function () {
+app.listen(process.env.PORT, function (err) {
+    if(err){
+        console.log(err);
+    }
     console.log("Registration System is Running!!");
 })
