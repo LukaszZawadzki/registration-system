@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>Nazwisko</th>
+        <th>Imię</th>
+        <th>Szkoła</th>
+        <th>Klasa</th>
+        <th>e-mail</th>
+        
+    </tr>
+    <% allStudents.forEach(function(student) { %>
+        <% if(student.active) { %>
+        <tr>
+            <td><%=student.lastname%></td>
+            <td><%=student.name%></td>
+            <td><%=student.school%></td>
+            <td><%=student.schoolClass%></td>
+            <td><%=student.email%></td>
+        </tr>
+            
+        <% } %>
+    <% }) %>
+</table>

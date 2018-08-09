@@ -1,0 +1,31 @@
+
+<p><a href="/administracja/logout">wyloguj</a></p>
+
+<% wszystkieTerminy.forEach(function(termin) { %>
+    <% if(termin.grade === 1 && termin.active) { %>
+    <div>
+        <h3>
+            <a href="<%=termin._id%>"><%=termin.day%> godz. <%=termin.hour%></a>
+        </h3>
+    </div>
+    <% } %>
+<% }) %>
+<% wszystkieTerminy.forEach(function(termin) { %>
+    <% if(termin.grade === 2 && termin.active) { %>
+    <div>
+        <h3>
+            <a href="<%=termin._id%>"><%=termin.day%> godz. <%=termin.hour%></a>
+        </h3>
+    </div>
+    <% } %>
+<% }) %>
+<% wszystkieTerminy.forEach(function(termin) { %>
+    <% if(termin.grade === 3 && termin.active) { %>
+    <div>
+        <h3>
+            <a href="<%=termin._id%>"><%=termin.day%> godz. <%=termin.hour%></a>
+        </h3>
+    </div>
+    <% } %>
+<% }) %>
+
