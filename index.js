@@ -60,7 +60,7 @@ app.use("/administracja", administrationRoutes);
 //--------------------------------------------
 //LISTEN
 //--------------------------------------------
-app.listen(process.env.PORT, function (err) {
+app.listen(process.env.PORT || 8080, function (err) {
     if(err){
         console.log(err);
     }

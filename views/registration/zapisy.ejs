@@ -88,10 +88,8 @@
             </div>
           </div>
           <div class="form-group col-md-3">
-            <button type="submit" id="submit" class="btn brn-lg btn-primary btn-block <% if(process.env.ACTIVE=false) { %><%=disabled%><% } %>" <% if(process.env.ACTIVE=false) { %><%=disabled%><% } %>>Zapisz się</button>
+            <button type="submit" id="submit" class="btn brn-lg btn-primary btn-block <%=process.env.DISABLED%>" <%=process.env.DISABLED%>>Zapisz się</button>
           <label for="submit" class="disabled">Zapisy zostaną uruchomione w połowie sierpnia</label>
-
-
 
 
           
