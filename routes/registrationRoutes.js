@@ -83,10 +83,17 @@ router.post("/", function (req, res){
                         res.render("registration/success", {color, message});
                     })
                     .catch(function(err){
-                        console.log(err);
-                        var color = "red";
-                        var message = "Wystąpił błąd, prosimy o kontakt z administratorem!";
-                        res.render("registration/success", {color, message});
+                        //Log friendly error
+                        console.error(error.toString());
+                    
+                        //Extract error msg
+                        const {message, code, response} = error;
+                    
+                        //Extract response msg
+                        const {headers, body} = response;
+                        /*var color = "red";
+                        var messageToClient = "Wystąpił błąd, prosimy o kontakt z administratorem!";*/
+                        res.render("registration/success"/*, {color, message}*/);
                     });
                 }
             });
