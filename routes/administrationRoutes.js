@@ -6,6 +6,7 @@ var Students = require("../models/students");
 var User = require("../models/user");
 var LocalStrategy = require("passport-local");
 
+
 //--------------------------------------------
 //Auth routes
 //--------------------------------------------

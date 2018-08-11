@@ -17,7 +17,7 @@ var studentSchema = new mongoose.Schema({
     },
     verificated: {
         type: Boolean,
-        default: true
+        default: false
     },
     verificationTo: {
         type: Date,
@@ -30,6 +30,10 @@ var studentSchema = new mongoose.Schema({
     terminy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Terminy"
+    },
+    mailHash: {
+        type: String,
+        defaultStatus: null
     }
 });
 
