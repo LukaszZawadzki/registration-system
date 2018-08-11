@@ -84,8 +84,8 @@ router.post("/", function (req, res){
                     })
                     .catch(function(error){
                         console.log(error);
-                        console.log(error.body);
-                        console.log(error.body.errors);
+                        console.log(error.response.body);
+                        console.log(error.response.body.errors);
                         var message = "Wystąpił błąd, prosimy o kontakt z administratorem!";
                         res.render("registration/success", {color, message});
                     });
