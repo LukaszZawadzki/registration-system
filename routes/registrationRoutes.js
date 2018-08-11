@@ -91,9 +91,9 @@ router.post("/", function (req, res){
                     
                         //Extract response msg
                         const {headers, body} = response;
-                        /*var color = "red";
-                        var messageToClient = "Wystąpił błąd, prosimy o kontakt z administratorem!";*/
-                        res.render("registration/success"/*, {color, message}*/);
+                        var color = "red";
+                        /*var message = "Wystąpił błąd, prosimy o kontakt z administratorem!";*/
+                        res.render("registration/success", {color, message});
                     });
                 }
             });
