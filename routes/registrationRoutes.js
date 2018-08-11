@@ -75,11 +75,19 @@ router.post("/", function (req, res){
                     msg.to = student.email;
                     msg.html = `<strong>Aby potwierdzić swoje zgłoszenie proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong>`,
                     console.log(msg.html);
-                    sgMail.send(msg);
-                    console.log("Everything Saved!!");
-                    var color = "green";
-                    var message = 'Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone! Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji. Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.';
-                    res.render("registration/success", {color, message});
+                    sgMail.send(msg)
+                    .then(function(message){
+                        console.log("Everything Saved!!");
+                        var color = "green";
+                        var message = 'Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone! Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji. Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.';
+                        res.render("registration/success", {color, message});
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                        var color = "red";
+                        var message = "Wystąpił błąd, prosimy o kontakt z administratorem!";
+                        res.render("registration/success", {color, message});
+                    });
                 }
             });
         })
