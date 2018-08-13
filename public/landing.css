@@ -8,6 +8,7 @@ body {
     background: url('krzyz-kurdwanow-lukasz_zawadzki.jpg') center;
     background-size: cover;
     height: 100vh;
+    background-repeat: no-repeat;
     color: #000;
     
 }
@@ -53,6 +54,40 @@ ul li {
     height: 100%;
 }
 
+@media (max-width:768px){
+    .left-menu {
+        display:none;
+    }
+    body {
+        margin: 0;
+        background: url('krzyz-LukaszZawadzki-mobile.jpg') center;
+        background-size: cover;
+        width: auto;
+        height: 100%;
+        background-repeat: no-repeat;
+    }
+    header {
+        margin: 0 auto;
+        position: absolute;
+        background-color: rgba(255,255,255,0.9);
+        width: 100%;
+        top: 65%;
+        left: 0;
+        text-align: center;
+    }
+    h1 {
+        margin-top: 10px;
+        color: #a1a1a1;
+    }
+    h2 {
+        font-size: 3vh;
+    }
+    ul {
+        font-size: 3vh;
+    }
+    
+}
+
 
 @keyframes imageAnimation { 
   0% { 
@@ -69,3 +104,4 @@ ul li {
 .no-cssanimations .slideshow li {
 	opacity: 1;
 }
+
