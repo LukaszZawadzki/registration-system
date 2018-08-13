@@ -1,5 +1,8 @@
 require("dotenv").config({ path: ".env" });
 
+    const https = require('https');
+    const fs = require('fs');
+
 var express = require("express"),
 app = express(),
 bodyParser = require("body-parser"),
@@ -57,6 +60,13 @@ app.use("/zapisy", registrationRoutes);
 app.use("/administracja", administrationRoutes);
 
 
+const options = {
+    cert: fs.readFileSync('./sslcert/fullchain.pem'),
+    key: fs.readFileSync('./sslcert/privkey.pem')
+};
+
+
+
 //--------------------------------------------
 //LISTEN
 //--------------------------------------------
@@ -66,3 +76,5 @@ app.listen(process.env.PORT || 8080, function (err) {
     }
     console.log("Registration System is Running!!");
 })
+
+https.createServer(options, app).listen(8443);

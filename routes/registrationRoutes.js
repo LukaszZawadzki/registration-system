@@ -57,7 +57,7 @@ router.get("/trzeci-rok", function (req, res){
 //--------------------------------------------
 
 
-router.post("/", function (req, res){
+router.post("/", checkEmail, function (req, res){
     let student = req.body.student;
     student.mailHash = generateRandom();
     Students.create(student)
@@ -75,20 +75,27 @@ router.post("/", function (req, res){
                     msg.to = student.email;
                     msg.html = `<strong>Aby potwierdzić swoje zgłoszenie proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong>`,
                     console.log(msg.html);
-                    sgMail.send(msg)
-                    .then(function(message){
-                        console.log("Everything Saved!!");
-                        var color = "green";
-                        var message = 'Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone! Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji. Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.';
-                        res.render("registration/success", {color, message});
-                    })
-                    .catch(function(error){
-                        console.log(error);
-                        console.log(error.response.body);
-                        console.log(error.response.body.errors);
-                        var message = "Wystąpił błąd, prosimy o kontakt z administratorem!";
-                        res.render("registration/success", {color, message});
-                    });
+                    if (process.env.SENDGRID_ON) {
+                        sgMail.send(msg)
+                        .then(function(message){
+                            console.log("Everything Saved!!");
+                            var color = "green";
+                            var message = 'Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone! Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji. Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.';
+                            res.render("registration/success", {color, message});
+                        })
+                        .catch(function(error){
+                            console.log(error);
+                            var color = "red";
+                            var message = "Wystąpił błąd, prosimy o kontakt z administratorem!";
+                            res.render("registration/success", {color, message});
+                        });
+                    } else {
+                        console.log("Everything Saved!! - without sending email");
+                            var color = "green";
+                            var message = 'Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone! Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji. Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.';
+                            res.render("registration/success", {color, message});
+                    }
+                    
                 }
             });
         })
@@ -157,6 +164,27 @@ router.get("/weryfikacja/:mHash", function(req, res){
 function generateRandom() {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
+
+function checkEmail(req, res, next){
+    let student = req.body.student;
+    Students.findOne({email: student.email})
+    .then(function(foundStudent){
+        if (foundStudent.email == student.email){
+            var color = "red";
+            var message = "Twój adres jest już w naszej bazie danych, jedna osoba może dokonać tylko jednego zgłoszenia";
+            res.render("registration/success", {color, message});
+        } else {
+            next();
+        }
+    })
+    .catch(function(err){
+        console.log(err);
+        var color = "red";
+        var message = "Wystąpił błąd, prosimy o kontakt z administratorem!";
+        res.render("registration/success", {color, message});
+    })
+};
+
 
 
 module.exports = router;
