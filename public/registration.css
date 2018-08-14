@@ -35,7 +35,7 @@ div[class="container"] {
     }
 }
 
-@media (max-width:424px){
+@media (max-width:460px){
     .section{
         padding: 0;
     }
