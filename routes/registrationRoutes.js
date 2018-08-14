@@ -169,7 +169,7 @@ function checkEmail(req, res, next){
     let student = req.body.student;
     Students.findOne({email: student.email})
     .then(function(foundStudent){
-        if (foundStudent.email == student.email){
+        if (foundStudent != null){
             var color = "red";
             var message = "Twój adres jest już w naszej bazie danych, jedna osoba może dokonać tylko jednego zgłoszenia";
             res.render("registration/success", {color, message});

@@ -25,3 +25,25 @@ div[class="container"] {
 .disabled {
     color: #5f5f5f;
 }
+@media (max-width:768px){
+    body {
+        background: none;
+        display: inline;
+    }
+    .section {
+        display: inline;
+    }
+}
+
+@media (max-width:424px){
+    .section{
+        padding: 0;
+    }
+    div.container {
+        margin: 0;
+        padding: 0;
+    }
+    #inputAddress {
+        width: 100%;
+    }
+}
