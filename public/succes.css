@@ -1,0 +1,54 @@
+body {
+    background: url('blured-background2.jpg') center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+label .disabled {
+    color: #5f5f5f;
+}
+section {
+    background-color: rgba(255,255,255,0.8);
+    padding: 1%;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+div[class="container"] {
+      padding-right: 3%;
+    }
+label{
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.disabled {
+    color: #5f5f5f;
+}
+
+@media (max-width:768px){
+    body {
+        background: none;
+        display: inline;
+    }
+    .section {
+        display: inline;
+    }
+}
+
+@media (max-width:460px){
+    .section{
+        padding: 0;
+    }
+    div.container {
+        margin: 0;
+        padding: 0;
+    }
+    #inputAddress {
+        width: 100%;
+    }
+}
