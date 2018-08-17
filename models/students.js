@@ -11,6 +11,7 @@ var studentSchema = new mongoose.Schema({
     group: String,
     address: String,
     zgoda: String,
+    rodo: String,
     active: {
         type: Boolean,
         default: true

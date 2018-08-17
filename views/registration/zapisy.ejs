@@ -81,18 +81,23 @@
           </div>
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="student[zgoda]" id="gridCheck" required>
-              <label class="form-check-label" for="gridCheck">
-                Wyrażam zgodę na przetwarzanie moich danych osobowych przez Parafię Podwyższania Krzyża Świętego w Krakowie na potrzeby rekrutacji do Kursu Przygotowującego do Sakramentu Bieżmowania.
+              <input class="form-check-input" type="checkbox" name="student[rodo]" id="gridCheck" required>
+              <label class="form-check-label small" for="gridCheck" id="1zgoda">
+                Oświadczam, że na podstawie przepisów Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE, zostałem/-am poinformowany/-a, iż:
+                <a href="/OswiadczenieoDO.pdf" target="_blank">INFORMACJA</a>
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="student[zgoda]" id="gridCheck2" required>
+              <label class="form-check-label small" for="gridCheck2" id="2zgoda">
+                Oświadczam, że wyrażam zgodę na przetwarzanie moich danych osobowych podanych w niniejszym formularzu rejestracyjnym w zakresie: imię, nazwisko, nazwa ulicy, adres poczty elektronicznej, numer telefonu, szkoła, klasa obejmujące następujące operacje: zbieranie, utrwalenie, porządkowanie, organizowanie, przechowywanie, pobieranie, przeglądanie, wykorzystywanie, tworzenie kopii zapasowych, modyfikowanie, ujawnienie poprzez rozpowszechnienie lub innego rodzaju udostępnienie, dopasowywanie, niszczenie, usuwanie
+                na potrzeby rekrutacji do Kursu Przygotowującego do Sakramentu Bieżmowania w Parafii Podwyższenia Krzyża Świętego w Krakowie.
               </label>
             </div>
           </div>
           <div class="form-group col-md-3">
             <button type="submit" id="submit" class="btn brn-lg btn-primary btn-block <%=process.env.DISABLED%>" <%=process.env.DISABLED%>>Zapisz się</button>
-          <label for="submit" class="disabled">Zapisy zostaną uruchomione w połowie sierpnia</label>
 
-
-          
 
         </form>
 <% include ../partials/formfooter %>
