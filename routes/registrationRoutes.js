@@ -79,10 +79,11 @@ router.post("/", checkEmail, function (req, res){
                     res.render("registration/success", {color, message});
                 } else {
                     msg.to = student.email;
-                    msg.html = `<strong>Aby potwierdzić swoje zgłoszenie proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong>
-                    <p>Po potwierdzeniu zgłoszenia będziesz zapisany/a do grupy ${termin.day} o godzinie ${termin.hour}</p>
+                    msg.html = `<p>Dziękujemy za zgłoszenie!</br></br>
+                    <strong>Aby je potwierdzić proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong></p>
+                    <p>Po potwierdzeniu zgłoszenia będziesz zapisany/a do grupy w ${termin.day} o godzinie ${termin.hour}.</p>
                     </br>
-                    <p>Pozdrawiamy,</br>
+                    <p>Z Bogiem,</br>
                     Parafia Podwyższenia Krzyża Świętego w Krakowie</p>`;
                     console.log(msg.html);
                     if (process.env.SENDGRID_ON) {
@@ -90,8 +91,8 @@ router.post("/", checkEmail, function (req, res){
                         .then(function(message){
                             console.log("Everything Saved!!");
                             var color = "green";
-                            var message = 'Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone! Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji. Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.';
-                            res.render("registration/success", {color, message});
+                            var message = '<h2 style="color: green;">Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone!</h2><h3 style="color: green;">Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji.</h3><p>Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.</p>';
+                            res.render("registration/registrationSuccess", {color, message});
                         })
                         .catch(function(error){
                             console.log(error);
@@ -100,9 +101,9 @@ router.post("/", checkEmail, function (req, res){
                             res.render("registration/success", {color, message});
                         });
                     } else {
-                        console.log("Everything Saved!! - without sending email");
+                            console.log("Everything Saved!! - without sending email");
                             var color = "green";
-                            var message = 'Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone! Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji. Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.';
+                            var message = '<h2>Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone!</h2><h2>Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji.</h2><p>Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.</p>';
                             res.render("registration/success", {color, message});
                     }
                     
@@ -129,7 +130,6 @@ router.post("/", checkEmail, function (req, res){
 //--------------------------------------------
 router.get("/potwierdzenie", function(req, res){
     res.render("registration/success");
-    
 });
 //--------------------------------------------
 //Weryfikazja e-mail
