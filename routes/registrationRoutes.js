@@ -79,7 +79,11 @@ router.post("/", checkEmail, function (req, res){
                     res.render("registration/success", {color, message});
                 } else {
                     msg.to = student.email;
-                    msg.html = `<strong>Aby potwierdzić swoje zgłoszenie proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong>`,
+                    msg.html = `<strong>Aby potwierdzić swoje zgłoszenie proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong>
+                    <p>Po potwierdzeniu zgłoszenia będziesz zapisany/a do grupy ${termin.day} o godzinie ${termin.hour}</p>
+                    </br>
+                    <p>Pozdrawiamy,</br>
+                    Parafia Podwyższenia Krzyża Świętego w Krakowie</p>`;
                     console.log(msg.html);
                     if (process.env.SENDGRID_ON) {
                         sgMail.send(msg)
