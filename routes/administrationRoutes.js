@@ -13,12 +13,12 @@ var LocalStrategy = require("passport-local");
 
 
 //registration form
-router.get("/register", isLoggedIn, function(req, res){
+router.get("/register",/* isLoggedIn,*/ function(req, res){
     res.render("administration/register");
 });
 
 //handling user register
-router.post("/register", isLoggedIn, function(req, res){
+router.post("/register", /*isLoggedIn, */function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
         if(err){ 
             console.log(err);
@@ -75,7 +75,7 @@ router.get("/", isLoggedIn, function (req, res) {
 router.get("/:groupId", isLoggedIn, function(req, res) {
     var groupId = req.params.groupId;
     Students.find({group:groupId},{},{sort:{
-        lastname: 1
+        day: 1
     }})
     .then(function(allStudents) {
         if(allStudents.length == 0) {

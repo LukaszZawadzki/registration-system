@@ -5,6 +5,9 @@
         <th>Szkoła</th>
         <th>Klasa</th>
         <th>e-mail</th>
+        <th>Telefon</th>
+        <th>Ulica</th>
+        <th>Zweryfikowany</th>
         
     </tr>
     <% allStudents.forEach(function(student) { %>
@@ -15,6 +18,13 @@
             <td><%=student.school%></td>
             <td><%=student.schoolClass%></td>
             <td><%=student.email%></td>
+            <td><%=student.telephone%></td>
+            <td><%=student.address%></td>
+            <% if (student.verificated) { %>
+                <td>zweryfikowany</td>
+            <% } else { %>
+                <td style="color: red">niezweryfikowany</td>
+            <% } %>
         </tr>
             
         <% } %>
