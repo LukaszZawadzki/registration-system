@@ -74,7 +74,7 @@ router.get("/", isLoggedIn, function (req, res) {
 
 router.get("/:groupId", isLoggedIn, function(req, res) {
     var groupId = req.params.groupId;
-    Students.find({group:groupId},{},{sort:{
+    Students.find({group:groupId, active: true},{},{sort:{
         day: 1
     }})
     .then(function(allStudents) {
