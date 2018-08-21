@@ -16,7 +16,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 //--------------------------------------------
 var indexRoutes = require("./routes/indexRoutes"),
     registrationRoutes = require("./routes/registrationRoutes"),
-    administrationRoutes = require("./routes/administrationRoutes");
+    administrationRoutes = require("./routes/administrationRoutes"),
+    backupRoutes = require("./routes/backupRoutes");
 //-------------------------------------------
 
 //--------------------------------------------
@@ -41,7 +42,14 @@ app.set("view engine", "ejs");
 app.use(require("express-session")({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 4 },
+    store: new (require('express-sessions'))({
+        storage: 'mongodb',
+        instance: mongoose,
+        collection: 'sessions', // optional
+        expire: 60 * 60 * 4 // optional
+    })
 }));
 
 app.use(passport.initialize());
@@ -55,6 +63,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use("/", indexRoutes);
 app.use("/zapisy", registrationRoutes);
 app.use("/administracja", administrationRoutes);
+app.use("/backup", backupRoutes);
 
 
 //--------------------------------------------
@@ -66,3 +75,4 @@ app.listen(process.env.PORT || 8080, function (err) {
     }
     console.log("Registration System is Running!!");
 })
+
