@@ -1,13 +1,14 @@
-<table>
+<% include ../partials/admheader %>
+<table class="table table-striped">
     <tr>
-        <th>Nazwisko</th>
-        <th>Imię</th>
-        <th>Szkoła</th>
-        <th>Klasa</th>
-        <th>e-mail</th>
-        <th>Telefon</th>
-        <th>Ulica</th>
-        <th>Zweryfikowany</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Imię</th>
+        <th scope="col">Szkoła</th>
+        <th scope="col">Klasa</th>
+        <th scope="col">e-mail</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Ulica</th>
+        <th scope="col">Zweryfikowany</th>
         
     </tr>
     <% allStudents.forEach(function(student) { %>
@@ -30,3 +31,4 @@
         <% } %>
     <% }) %>
 </table>
+<% include ../partials/admfooter %>

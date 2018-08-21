@@ -43,12 +43,12 @@ app.use(require("express-session")({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60 * 60 * 4 },
+    cookie: { maxAge: 60 * 60 * 60 },
     store: new (require('express-sessions'))({
         storage: 'mongodb',
         instance: mongoose,
         collection: 'sessions', // optional
-        expire: 60 * 60 * 4 // optional
+        expire: 60 * 60 * 60// optional
     })
 }));
 

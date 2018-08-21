@@ -1,8 +1,10 @@
 
+<% include ../partials/admheader %>
+<div class="container">
 <p><a href="/administracja/logout">wyloguj</a></p>
 
 
-<h2>klasy VII Szkoły Podstawowej</h2>
+<h2 class="display-2">klasy VII Szkoły Podstawowej</h2>
 <% wszystkieTerminy.forEach(function(termin) { %>
     <% if(termin.grade === 1 && termin.active) { %>
     <div>
@@ -12,7 +14,7 @@
     </div>
     <% } %>
 <% }) %>
-<h2>klasy VIII Szkoły Podstawowej</h2>
+<h2 class="display-2">klasy VIII Szkoły Podstawowej</h2>
 <% wszystkieTerminy.forEach(function(termin) { %>
     <% if(termin.grade === 2 && termin.active) { %>
     <div>
@@ -22,7 +24,7 @@
     </div>
     <% } %>
 <% }) %>
-<h2>klasy III gimnazjum</h2>
+<h2 class="display-2">klasy III gimnazjum</h2>
 <% wszystkieTerminy.forEach(function(termin) { %>
     <% if(termin.grade === 3 && termin.active) { %>
     <div>
@@ -32,4 +34,5 @@
     </div>
     <% } %>
 <% }) %>
-
+</div>
+<% include ../partials/admfooter %>
