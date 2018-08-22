@@ -103,7 +103,7 @@ router.post("/", checkEmail, function (req, res){
                         klasy = "III gimnazjum";
                     }
                     msg.html = `<p>Dziękujemy za zgłoszenie!</br></br>
-                    <strong>Aby je potwierdzić proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong></p>
+                    <strong>Aby je potwierdzić proszę kliknąć w link: <a href="https://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong></p>
                     <p>Po potwierdzeniu zgłoszenia będziesz zapisany/a do grupy w ${termin.day} o godzinie ${termin.hour} dla klas ${klasy}.</p>
                     </br>
                     <p>Z Bogiem,</br>

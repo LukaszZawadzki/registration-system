@@ -7,8 +7,10 @@ passport = require("passport"),
 User = require("./models/user"),
 LocalStrategy = require("passport-local"),
 passportLocalMongoose = require("passport-local-mongoose"),
-mongoose = require("mongoose");
+mongoose = require("mongoose"),
+helmet=require("helmet");
 
+app.use(helmet());
 
 app.use(bodyParser.urlencoded({extended: true}));
 //--------------------------------------------
@@ -46,7 +48,7 @@ app.use(require("express-session")({
     saveUninitialized: false,
     cookie: { 
         maxAge: 1000 * 60 * 60,
-        secure: false,
+        secure: true,
         httpOnly: true,
         expires: expiryDate
     },
