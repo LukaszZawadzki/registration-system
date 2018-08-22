@@ -19,7 +19,11 @@ router.get("/pierwszy-rok", function (req, res){
     var klasy = "VII szkoły podstawowej";
     Terminy.find({grade: 1, year: 2018},{},{sort:{
         name: 1
-    }})
+    }}).populate({
+        path: 'students',
+        match: { active: true },
+        select: 'active -_id',
+    })
     .then(function(wszystkieTerminy){
     res.render("registration/zapisy", {wszystkieTerminy, klasy}); 
     })
@@ -34,7 +38,11 @@ router.get("/drugi-rok", function (req, res){
     var klasy = "VIII szkoły podstawowej";
     Terminy.find({grade: 2, year: 2018},{},{sort:{
         name: 1
-    }})
+    }}).populate({
+        path: 'students',
+        match: { active: true },
+        select: 'active -_id',
+    })
     .then(function(wszystkieTerminy){
     res.render("registration/zapisy", {wszystkieTerminy, klasy}); 
     })
@@ -49,7 +57,11 @@ router.get("/trzeci-rok", function (req, res){
     var klasy = "III gimnazjum";
     Terminy.find({grade: 3, year: 2018},{},{sort:{
         name: 1
-    }})
+    }}).populate({
+        path: 'students',
+        match: { active: true },
+        select: 'active -_id',
+    })
     .then(function(wszystkieTerminy){
     res.render("registration/zapisy", {wszystkieTerminy, klasy}); 
     })
