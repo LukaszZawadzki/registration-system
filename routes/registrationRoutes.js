@@ -3,6 +3,7 @@ var router = express.Router();
 var Terminy = require("../models/terminy");
 var Students = require("../models/students");
 const sgMail = require('@sendgrid/mail');
+var fs = require("fs");
 sgMail.setApiKey(process.env.SENDGRIDAPI);
 //routes
 
@@ -79,9 +80,19 @@ router.post("/", checkEmail, function (req, res){
                     res.render("registration/success", {color, message});
                 } else {
                     msg.to = student.email;
+                    let klasy = "";
+                    if(termin.grade == 1) {
+                        klasy = "VII szkoły podstawowej";
+                    }                    
+                    if(termin.grade == 2) {
+                        klasy = "VIII szkoły podstawowej";
+                    }                    
+                    if(termin.grade == 3) {
+                        klasy = "III gimnazjum";
+                    }
                     msg.html = `<p>Dziękujemy za zgłoszenie!</br></br>
                     <strong>Aby je potwierdzić proszę kliknąć w link: <a href="http://bierzmowaniekurdwanow.pl/zapisy/weryfikacja/${student.mailHash}">LINK</a></strong></p>
-                    <p>Po potwierdzeniu zgłoszenia będziesz zapisany/a do grupy w ${termin.day} o godzinie ${termin.hour}.</p>
+                    <p>Po potwierdzeniu zgłoszenia będziesz zapisany/a do grupy w ${termin.day} o godzinie ${termin.hour} dla klas ${klasy}.</p>
                     </br>
                     <p>Z Bogiem,</br>
                     Parafia Podwyższenia Krzyża Świętego w Krakowie</p>`;
@@ -91,6 +102,7 @@ router.post("/", checkEmail, function (req, res){
                         .then(function(message){
                             console.log("Everything Saved!!");
                             var color = "green";
+                            saveData(`./backup/students/${student.name}_${student.lastname}_${Date.now().toString()}.json`, JSON.stringify(student)/*.toString()*/, "utf8");
                             var message = '<h2 style="color: green;">Twoje zgłoszenie zostało wysłane ale nie jest jeszcze potwierdzone!</h2><h3 style="color: green;">Aby być wpisanym na listę kliknij w link wysłany na Twój adres e-mail w celu weryfikacji.</h3><p>Jeśli nie dotarła do Ciebie wiadomość sprawdź koniecznie w folderze ze spamem albo w innych folderach w których mogą znajdować się wiadomości jak np. "powiadomienia", "oferty", "społeczności". Jeśli wiadomość mimo wszystko nie dotarła prosimy o kontakt pod adresem admin@bierzmowaniekurdwanow.pl by zostać wpisanym na listę.</p>';
                             res.render("registration/registrationSuccess", {color, message});
                         })
@@ -171,6 +183,16 @@ router.get("/weryfikacja/:mHash", function(req, res){
 //Functions
 //--------------------------------------------
 
+// functions
+function saveData(filename, data, encoding) {
+    fs.writeFile(filename, data, encoding, function(error){
+            if(error){
+                console.log(error);
+            };
+            console.log("file writen");
+        })
+};
+
 function generateRandom() {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
@@ -181,7 +203,7 @@ function checkEmail(req, res, next){
     .then(function(foundStudent){
         if (foundStudent != null){
             var color = "red";
-            var message = "Twój adres jest już w naszej bazie danych, jedna osoba może dokonać tylko jednego zgłoszenia";
+            var message = "Twój adres e-mail jest już w naszej bazie danych, jedna osoba może dokonać tylko jednego zgłoszenia";
             res.render("registration/success", {color, message});
         } else {
             next();
