@@ -7,8 +7,8 @@ passport = require("passport"),
 User = require("./models/user"),
 LocalStrategy = require("passport-local"),
 passportLocalMongoose = require("passport-local-mongoose"),
-mongoose = require("mongoose"),
-helmet=require("helmet");
+mongoose = require("mongoose");
+var helmet=require("helmet");
 
 app.use(helmet());
 
@@ -41,22 +41,20 @@ app.set("view engine", "ejs");
 //--------------------------------------------
 //Authentication
 //--------------------------------------------
-var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(require("express-session")({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        maxAge: 1000 * 60 * 60,
-        secure: true,
-        httpOnly: true,
-        expires: expiryDate
-    },
+        maxAge: 1000 * 60 * 60 * 24 * 60,
+        secure: false,
+        httpOnly: true
+        },
     store: new (require('express-sessions'))({
         storage: 'mongodb',
         instance: mongoose,
-        collection: 'sessions', // optional
-        expire: 1000 * 60 * 60// optional
+        collection: 'newsessions', // optional
+        expire: 1000 * 60 * 60 * 24 * 60// optional
     })
 }));
 
