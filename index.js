@@ -7,10 +7,10 @@ passport = require("passport"),
 User = require("./models/user"),
 LocalStrategy = require("passport-local"),
 passportLocalMongoose = require("passport-local-mongoose"),
-mongoose = require("mongoose"),
-helmet =require("helmet");
+mongoose = require("mongoose");
+//helmet =require("helmet");
 
-app.use(helmet());
+//app.use(helmet());
 
 app.use(bodyParser.urlencoded({extended: true}));
 //--------------------------------------------
