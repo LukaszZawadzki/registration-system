@@ -1,6 +1,17 @@
-<h1>Login</h1>
-<form action="/administracja/logowanie" method="POST">
-    <input type="text" name="username" placeholder="login">
-    <input type="password" name="password" placeholder="hasło">
-    <button>Zaloguj</button>
-</form>
+<% include ../partials/admheader %>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="/administracja/logowanie" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" name="username" placeholder="login">
+                </div>            
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="password" name="password" placeholder="hasło">
+                </div>         
+                <button class="btn btn-md">Zaloguj</button>
+            </div>
+            
+        </form>
+    </div>
+<% include ../partials/admfooter %>

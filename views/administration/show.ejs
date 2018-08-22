@@ -1,36 +1,35 @@
 
 <% include ../partials/admheader %>
 <div class="container">
-<p><a href="/administracja/logout">wyloguj</a></p>
+<p class="text-right"><a href="/administracja/logout">wyloguj</a></p>
 
-
-<h2 class="display-2">klasy VII Szkoły Podstawowej</h2>
+<h4 class="display-2">klasy VII Szkoły Podstawowej</h4>
 <% wszystkieTerminy.forEach(function(termin) { %>
     <% if(termin.grade === 1 && termin.active) { %>
     <div>
-        <h3>
+        <h5>
             <a href="<%=termin._id%>"><%=termin.day%> godz. <%=termin.hour%></a>
-        </h3>
+        </h5>
     </div>
     <% } %>
 <% }) %>
-<h2 class="display-2">klasy VIII Szkoły Podstawowej</h2>
+<h4 class="display-2">klasy VIII Szkoły Podstawowej</h4>
 <% wszystkieTerminy.forEach(function(termin) { %>
     <% if(termin.grade === 2 && termin.active) { %>
     <div>
-        <h3>
+        <h5>
             <a href="<%=termin._id%>"><%=termin.day%> godz. <%=termin.hour%></a>
-        </h3>
+        </h5>
     </div>
     <% } %>
 <% }) %>
-<h2 class="display-2">klasy III gimnazjum</h2>
+<h4 class="display-2">klasy III gimnazjum</h4>
 <% wszystkieTerminy.forEach(function(termin) { %>
     <% if(termin.grade === 3 && termin.active) { %>
     <div>
-        <h3>
+        <h5>
             <a href="<%=termin._id%>"><%=termin.day%> godz. <%=termin.hour%></a>
-        </h3>
+        </h5>
     </div>
     <% } %>
 <% }) %>
